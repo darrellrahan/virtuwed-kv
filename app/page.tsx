@@ -1,12 +1,5 @@
-import { Suspense } from "react";
-import Place from "./compontents/Place";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <main>
-      <Suspense fallback={<p>Loading Image...</p>}>
-        <Place />
-      </Suspense>
-    </main>
-  );
+  redirect("/gallery/scene/0");
 }

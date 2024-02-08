@@ -1,8 +1,8 @@
 export const data = {
   scenes: [
     {
-      id: "0-1",
-      name: "1",
+      id: "0",
+      name: "Gallery",
       levels: [
         {
           tileSize: 256,
@@ -16,36 +16,23 @@ export const data = {
       ],
       faceSize: 512,
       initialViewParameters: {
-        yaw: 0.6329675740437057,
-        pitch: 0.08982789610088737,
-        fov: 1.3473765980835988,
+        yaw: 0.6801007255128297,
+        pitch: 0.002033408853883145,
+        fov: 1.4070723946101484,
       },
       linkHotspots: [
         {
-          yaw: 0.13521700126966962,
-          pitch: -0.09237745167522249,
-          rotation: 6.283185307179586,
-          target: "1-2",
-        },
-        {
-          yaw: 1.1102177415845471,
-          pitch: -0.0958872109074651,
+          yaw: 1.1004122837816634,
+          pitch: -0.0834150514989851,
           rotation: 0,
-          target: "2-3",
+          target: "0",
         },
       ],
-      infoHotspots: [
-        {
-          yaw: 0.6028509921838481,
-          pitch: -0.14400185970459134,
-          title: "Room 1",
-          text: "This is the first room",
-        },
-      ],
+      infoHotspots: [],
     },
     {
-      id: "1-2",
-      name: "2",
+      id: "1",
+      name: "Gallery",
       levels: [
         {
           tileSize: 256,
@@ -59,36 +46,23 @@ export const data = {
       ],
       faceSize: 512,
       initialViewParameters: {
-        yaw: 0.6538105098325939,
-        pitch: 0.07346841449012054,
+        yaw: 1.2483331455380924,
+        pitch: 0.04719792443085069,
         fov: 1.3473765980835988,
       },
       linkHotspots: [
         {
-          yaw: -0.055830913786165226,
-          pitch: 0.028137752554064477,
+          yaw: 1.0298523841602307,
+          pitch: 0.007606603336807183,
           rotation: 0,
-          target: "0-1",
-        },
-        {
-          yaw: 1.079221167375799,
-          pitch: 0.06181883201430871,
-          rotation: 0,
-          target: "2-3",
+          target: "1",
         },
       ],
-      infoHotspots: [
-        {
-          yaw: 0.32847158345524363,
-          pitch: -0.1894853894498425,
-          title: "Room 2",
-          text: "This is the second room",
-        },
-      ],
+      infoHotspots: [],
     },
     {
-      id: "2-3",
-      name: "3",
+      id: "2",
+      name: "Gallery",
       levels: [
         {
           tileSize: 256,
@@ -102,39 +76,26 @@ export const data = {
       ],
       faceSize: 512,
       initialViewParameters: {
-        yaw: 3.0283456816528824,
-        pitch: 0.12624316991227857,
+        yaw: 3.0882284991121,
+        pitch: 0.07744235340531702,
         fov: 1.3473765980835988,
       },
       linkHotspots: [
         {
-          yaw: 2.992921892353589,
-          pitch: 0.08789290977301611,
+          yaw: 2.993963968456807,
+          pitch: 0.07709994688622146,
           rotation: 0,
-          target: "1-2",
-        },
-        {
-          yaw: -1.3617006006126893,
-          pitch: 0.0573374332711154,
-          rotation: 0,
-          target: "0-1",
+          target: "2",
         },
       ],
-      infoHotspots: [
-        {
-          yaw: 2.677376967817148,
-          pitch: -0.07521163240361517,
-          title: "Room 3",
-          text: "This is the third room",
-        },
-      ],
+      infoHotspots: [],
     },
   ],
-  name: "Coba Coba",
+  name: "Nyoba Marzipano",
   settings: {
     mouseViewMode: "drag",
     autorotateEnabled: true,
-    fullscreenButton: true,
-    viewControlButtons: true,
+    fullscreenButton: false,
+    viewControlButtons: false,
   },
 };
