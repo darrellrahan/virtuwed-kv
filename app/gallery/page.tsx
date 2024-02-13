@@ -1,20 +1,58 @@
-import Link from "next/link";
 import React from "react";
+import Memory from "../compontents/Memory";
+import Search from "../compontents/Search";
+import Title from "../compontents/Title";
 
 function page() {
   return (
-    <main>
-      <h1>gallery</h1>
-      <div className="flex gap-4 my-8">
-        <Link href="/gallery/scene/1" className="underline hover:no-underline">
-          Scene 1
-        </Link>
-        <Link href="/gallery/scene/2" className="underline hover:no-underline">
-          Scene 2
-        </Link>
-        <Link href="/gallery/scene/3" className="underline hover:no-underline">
-          Scene 3
-        </Link>
+    <main className="p-8 lg:p-16">
+      <Title />
+      <Search />
+      <div className="space-y-48">
+        <Memory
+          assets={[
+            {
+              bg: "bg-[url('/carousel-1.svg')]",
+              url: "/gallery/scene/1",
+            },
+            {
+              bg: "bg-[url('/carousel-2.svg')]",
+              url: "/gallery/scene/2",
+            },
+            {
+              bg: "bg-[url('/carousel-3.svg')]",
+              url: "/gallery/scene/3",
+            },
+          ]}
+          title="Prewedding"
+          date="20 Desember 2023"
+        />
+        <Memory
+          assets={[
+            {
+              bg: "bg-[url('/carousel-5.svg')]",
+              url: "/gallery/scene/1",
+            },
+            {
+              bg: "bg-[url('/carousel-4.svg')]",
+              url: "/gallery/scene/2",
+            },
+            {
+              bg: "bg-[url('/carousel-3.svg')]",
+              url: "/gallery/scene/3",
+            },
+            {
+              bg: "bg-[url('/carousel-2.svg')]",
+              url: "/gallery/scene/1",
+            },
+            {
+              bg: "bg-[url('/carousel-1.svg')]",
+              url: "/gallery/scene/3",
+            },
+          ]}
+          title="TheDay"
+          date="4 Januari 2024"
+        />
       </div>
     </main>
   );

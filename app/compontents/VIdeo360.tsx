@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { VideoAsset } from "../VideoAsset";
 
 function VIdeo360() {
   const panoRef = useRef(null);
   const linkRef = useRef<HTMLAnchorElement>(null);
+  const [destroyScene, setDestroyScene] = useState(false);
 
   useEffect(() => {
     const Marzipano = require("marzipano");
@@ -40,6 +41,11 @@ function VIdeo360() {
       geometry: geometry,
       view: view,
     });
+
+    if (destroyScene) {
+      scene.destroy();
+      return;
+    }
 
     // Display scene.
     scene.switchTo();
@@ -96,7 +102,7 @@ function VIdeo360() {
         }
       }, interval);
     }
-  }, []);
+  }, [destroyScene]);
 
   return (
     <main className="flex items-center justify-center h-screen">
@@ -105,6 +111,7 @@ function VIdeo360() {
         href="/gallery"
         className="hidden absolute top-8 left-8 z-50"
         ref={linkRef}
+        onClick={() => setDestroyScene(true)}
       >
         <Image src="/img/link.png" alt="link" width={80} height={80} />
       </Link>
