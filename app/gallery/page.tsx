@@ -23,6 +23,10 @@ function page() {
               bg: "bg-[url('/carousel-3.svg')]",
               url: "/gallery/scene/3",
             },
+            {
+              bg: "bg-[url('/carousel-4.svg')]",
+              url: "/gallery/scene/4",
+            },
           ]}
           title="Prewedding"
           date="20 Desember 2023"
@@ -30,12 +34,8 @@ function page() {
         <Memory
           assets={[
             {
-              bg: "bg-[url('/carousel-5.svg')]",
-              url: "/gallery/scene/1",
-            },
-            {
               bg: "bg-[url('/carousel-4.svg')]",
-              url: "/gallery/scene/2",
+              url: "/gallery/scene/4",
             },
             {
               bg: "bg-[url('/carousel-3.svg')]",
@@ -43,11 +43,11 @@ function page() {
             },
             {
               bg: "bg-[url('/carousel-2.svg')]",
-              url: "/gallery/scene/1",
+              url: "/gallery/scene/2",
             },
             {
               bg: "bg-[url('/carousel-1.svg')]",
-              url: "/gallery/scene/3",
+              url: "/gallery/scene/1",
             },
           ]}
           title="TheDay"
