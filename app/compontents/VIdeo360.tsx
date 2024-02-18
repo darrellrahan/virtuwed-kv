@@ -3,11 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import { lora } from "../font";
 import { VideoAsset } from "../VideoAsset";
 
 function VIdeo360() {
   const panoRef = useRef(null);
-  const linkRef = useRef<HTMLAnchorElement>(null);
+  const clickToStart = useRef<HTMLDivElement>(null);
+  const [overlay, setOverlay] = useState(false);
 
   useEffect(() => {
     const Marzipano = require("marzipano");
@@ -70,6 +72,8 @@ function VIdeo360() {
       // Prevent the video from going full screen on iOS.
       video.playsInline = true;
 
+      video.muted = true;
+
       video.play();
 
       waitForReadyState(video, video.HAVE_METADATA, 100, function () {
@@ -77,7 +81,6 @@ function VIdeo360() {
           asset.setVideo(video);
         });
       });
-      linkRef.current!.style.display = "inline-block";
     }
 
     // Wait for an element to reach the given readyState by polling.
@@ -99,18 +102,40 @@ function VIdeo360() {
   }, []);
 
   return (
-    <main className="flex items-center justify-center h-screen">
+    <main className="h-screen">
       <div className="h-full w-full absolute" ref={panoRef}></div>
-      <Link
-        href="/gallery"
-        className="hidden absolute top-8 left-8 z-50"
-        ref={linkRef}
+      <div
+        ref={clickToStart}
+        className="w-full h-full flex items-center justify-center bg-white cursor-pointer z-10 relative"
+        onClick={() => {
+          clickToStart.current!.style.display = "none";
+          setOverlay(true);
+        }}
       >
-        <Image src="/img/link.png" alt="link" width={80} height={80} />
-      </Link>
-      <p className="text-center p-16">
-        Click anywhere on the page to start playing the video.
-      </p>
+        <p>Click anywhere on the page to start playing the video.</p>
+      </div>
+      {overlay && (
+        <div
+          className={`${lora.className} absolute z-20 top-0 inset-x-0 h-14 bg-[rgb(24,25,38)] px-4 flex items-center`}
+        >
+          <Link href="/gallery">
+            <Image
+              priority
+              src="/ic-back.svg"
+              alt="back to gallery"
+              width={24}
+              height={24}
+            />
+          </Link>
+        </div>
+      )}
+      {overlay && (
+        <div
+          className={`${lora.className} absolute z-20 bottom-0 inset-x-0 h-12 bg-[rgb(24,25,38)] flex items-center justify-center text-white font-medium`}
+        >
+          360 video
+        </div>
+      )}
     </main>
   );
 }
