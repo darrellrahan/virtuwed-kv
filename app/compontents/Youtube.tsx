@@ -29,7 +29,9 @@ function Youtube360() {
         <button
           onClick={() => {
             if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-              return router.push("https://www.youtube.com/watch?v=HqYhkpGgZXc");
+              return router.push(
+                "https://youtu.be/HqYhkpGgZXc?si=LkHRg9xralqrVtkO"
+              );
             }
             setVideo({
               muted: true,
