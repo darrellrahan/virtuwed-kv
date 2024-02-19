@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player/youtube";
 import { lora } from "../font";
+import { useRouter } from "next/navigation";
 
 function Youtube360() {
   const clickToStart = useRef<HTMLDivElement>(null);
@@ -13,22 +14,34 @@ function Youtube360() {
     playing: true,
   });
   const [overlay, setOverlay] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log();
+  }, []);
 
   return (
     <div className="h-screen relative">
       <div
         ref={clickToStart}
-        onClick={() => {
-          setVideo({
-            muted: true,
-            playing: true,
-          });
-          clickToStart.current!.style.display = "none";
-          setOverlay(true);
-        }}
-        className="absolute inset-0 bg-white flex items-center justify-center cursor-pointer"
+        className="absolute inset-0 bg-white flex items-center justify-center"
       >
-        <p>Click anywhere on the page to start playing the video.</p>
+        <button
+          onClick={() => {
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+              return router.push("https://www.youtube.com/watch?v=HqYhkpGgZXc");
+            }
+            setVideo({
+              muted: true,
+              playing: true,
+            });
+            clickToStart.current!.style.display = "none";
+            setOverlay(true);
+          }}
+          className="bg-pink-600 text-white rounded-md p-2"
+        >
+          Play
+        </button>
       </div>
       {overlay && (
         <div
@@ -49,7 +62,7 @@ function Youtube360() {
         </div>
       )}
       <ReactPlayer
-        url="https://www.youtube.com/watch?v=HqYhkpGgZXc"
+        url="https://www.youtube-nocookie.com/watch?v=HqYhkpGgZXc"
         width="100%"
         height="100%"
         muted={video.muted}
