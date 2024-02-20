@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { StateProvider } from "./context/state";
 import { montserrat } from "./font";
 import "./globals.css";
 
@@ -13,8 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={montserrat.className}>{children}</body>
-    </html>
+    <StateProvider>
+      <html lang="en">
+        <body className={montserrat.className}>{children}</body>
+      </html>
+    </StateProvider>
   );
 }

@@ -22,10 +22,10 @@ export const data = {
       },
       linkHotspots: [
         {
-          yaw: 1.1004122837816634,
-          pitch: -0.0834150514989851,
+          yaw: 1.1102177415845471,
+          pitch: -0.0958872109074651,
           rotation: 0,
-          target: "0",
+          target: "1",
         },
       ],
       infoHotspots: [],
@@ -50,14 +50,7 @@ export const data = {
         pitch: 0.04719792443085069,
         fov: 1.3473765980835988,
       },
-      linkHotspots: [
-        {
-          yaw: 1.0298523841602307,
-          pitch: 0.007606603336807183,
-          rotation: 0,
-          target: "1",
-        },
-      ],
+      linkHotspots: [],
       infoHotspots: [],
     },
     {
@@ -80,14 +73,7 @@ export const data = {
         pitch: 0.07744235340531702,
         fov: 1.3473765980835988,
       },
-      linkHotspots: [
-        {
-          yaw: 2.993963968456807,
-          pitch: 0.07709994688622146,
-          rotation: 0,
-          target: "2",
-        },
-      ],
+      linkHotspots: [],
       infoHotspots: [],
     },
   ],

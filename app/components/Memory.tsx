@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 import { EffectCards, Navigation, Scrollbar } from "swiper/modules";
 import Link from "next/link";
 import "../swiper-carousel.css";
+import { useStateContext } from "../context/state";
 
 function Memory({
   assets,
@@ -21,9 +22,9 @@ function Memory({
   title: string;
   date: string;
 }) {
-  const [currentSlide, setCurrentSlide] = useState(1);
   const [explore360, setExplore360] = useState("hidden");
   const openingTouch = useRef<HTMLDivElement>(null);
+  const { galleryState, setGalleryState } = useStateContext();
 
   useEffect(() => {
     const id = setTimeout(() => {
@@ -36,6 +37,25 @@ function Memory({
     };
   }, []);
 
+  useEffect(() => {
+    function handleScroll() {
+      setGalleryState({ ...galleryState, scrollY: window.scrollY });
+    }
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: galleryState.scrollY,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <section id="preview" className="relative">
       <div className={`text-center mb-0 ${lora.className}`}>
@@ -44,6 +64,7 @@ function Memory({
       </div>
       <div className="px-8 py-16 relative">
         <Swiper
+          initialSlide={galleryState.currentSlide}
           effect={"cards"}
           grabCursor={true}
           scrollbar={{
@@ -52,7 +73,10 @@ function Memory({
           modules={[EffectCards, Scrollbar, Navigation]}
           className="mySwiper"
           onSlideChange={(swiper: any) => {
-            setCurrentSlide(swiper.activeIndex + 1);
+            setGalleryState({
+              ...galleryState,
+              currentSlide: swiper.activeIndex,
+            });
           }}
           navigation={true}
         >
@@ -83,7 +107,7 @@ function Memory({
           <h1
             className={`text-2xl font-semibold ${lora.className} absolute -bottom-[4.75rem] right-0`}
           >
-            {currentSlide}/{assets.length}
+            {galleryState.currentSlide + 1}/{assets.length}
           </h1>
           <div
             ref={openingTouch}

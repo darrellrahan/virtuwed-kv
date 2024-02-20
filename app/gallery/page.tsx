@@ -1,8 +1,7 @@
-import Image from "next/image";
 import React from "react";
-import Memory from "../compontents/Memory";
-import Search from "../compontents/Search";
-import Title from "../compontents/Title";
+import Memory from "../components/Memory";
+import Search from "../components/Search";
+import Title from "../components/Title";
 
 function page() {
   return (
@@ -24,20 +23,12 @@ function page() {
               bg: "bg-[url('/carousel-3.png')]",
               url: "/gallery/scene/3",
             },
-            {
-              bg: "bg-[url('/carousel-4.png')]",
-              url: "/gallery/scene/4",
-            },
           ]}
           title="Prewedding"
           date="20 Desember 2023"
         />
         <Memory
           assets={[
-            {
-              bg: "bg-[url('/carousel-4.png')]",
-              url: "/gallery/scene/4",
-            },
             {
               bg: "bg-[url('/carousel-3.png')]",
               url: "/gallery/scene/3",

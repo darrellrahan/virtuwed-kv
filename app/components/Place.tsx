@@ -1,8 +1,11 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef } from "react";
 import { data } from "../data";
+import { lora } from "../font";
 
 function Place({ id }: { id: string }) {
   const panoRef = useRef(null);
@@ -69,7 +72,7 @@ function Place({ id }: { id: string }) {
       });
 
       // Create link hotspots.
-      data.linkHotspots.forEach(function (hotspot) {
+      data.linkHotspots!.forEach(function (hotspot) {
         var element = createLinkHotspotElement(hotspot);
         scene
           .hotspotContainer()
@@ -157,6 +160,15 @@ function Place({ id }: { id: string }) {
       }
     }
 
+    function findSceneById(id: any) {
+      for (var i = 0; i < scenes.length; i++) {
+        if (scenes[i].data.id === id) {
+          return scenes[i];
+        }
+      }
+      return null;
+    }
+
     function findSceneDataById(id: any) {
       for (var i = 0; i < data.scenes.length; i++) {
         if (data.scenes[i].id === id) {
@@ -170,7 +182,35 @@ function Place({ id }: { id: string }) {
     switchScene(scenes[0]);
   }, []);
 
-  return <div className="h-full w-full absolute" ref={panoRef}></div>;
+  return (
+    <div className="h-screen-relative">
+      <div className="h-full w-full absolute" ref={panoRef}></div>
+      {id !== "0" && (
+        <div
+          className={`${lora.className} absolute bottom-0 inset-x-0 h-16 bg-[#FFF9F9] flex items-center text-[#F66F6F] rounded-tl-[45px] font-medium px-8 text-lg`}
+        >
+          <Link href="/gallery" className="flex items-center gap-2">
+            <Image
+              src="/ic-back-pink.svg"
+              alt="link"
+              width={24}
+              height={24}
+              priority
+            />
+            <span>Back to gallery</span>
+          </Link>
+          <Image
+            src="/flower.png"
+            alt="flower"
+            width={120}
+            height={120}
+            priority
+            className="absolute bottom-0 right-0"
+          />
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default Place;
