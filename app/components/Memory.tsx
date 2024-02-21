@@ -11,20 +11,20 @@ import "swiper/css/navigation";
 import { EffectCards, Navigation, Scrollbar } from "swiper/modules";
 import Link from "next/link";
 import "../swiper-carousel.css";
-import { useStateContext } from "../context/state";
+import { useAsset360Context } from "../context/Asset360Provider";
+import { useRestoreScrollContext } from "../context/RestoreScrollProvider";
 
 function Memory({
   assets,
   title,
-  date,
 }: {
-  assets: { bg: string; url: string }[];
+  assets: { bg: string; url: string; src: string }[];
   title: string;
-  date: string;
 }) {
   const [explore360, setExplore360] = useState("hidden");
   const openingTouch = useRef<HTMLDivElement>(null);
-  const { galleryState, setGalleryState } = useStateContext();
+  const { setPhoto, setVideo } = useAsset360Context();
+  const { galleryState, setGalleryState } = useRestoreScrollContext();
 
   useEffect(() => {
     const id = setTimeout(() => {
@@ -37,31 +37,13 @@ function Memory({
     };
   }, []);
 
-  useEffect(() => {
-    function handleScroll() {
-      setGalleryState({ ...galleryState, scrollY: window.scrollY });
-    }
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    window.scrollTo({
-      top: galleryState.scrollY,
-      behavior: "smooth",
-    });
-  }, []);
-
   return (
     <section id="preview" className="relative">
-      <div className={`text-center mb-0 ${lora.className}`}>
-        <h1 className="text-[#F66F6F] text-3xl font-bold mb-2">#{title}</h1>
-        <p className="font-medium text-lg">{date}</p>
-      </div>
+      <h1
+        className={`${lora.className} text-[#F66F6F] text-3xl font-bold text-center`}
+      >
+        #{title}
+      </h1>
       <div className="px-8 py-16 relative">
         <Swiper
           initialSlide={galleryState.currentSlide}
@@ -83,11 +65,28 @@ function Memory({
           {assets.map((slide, index) => (
             <SwiperSlide
               key={index}
-              className={`${slide.bg} bg-cover rounded-md relative`}
+              style={{ backgroundImage: `url('${slide.bg}')` }}
+              className="bg-cover rounded-md relative"
             >
+              <Image
+                priority
+                src={
+                  slide.url.includes("photo") ? "/ic-img.svg" : "/ic-video.svg"
+                }
+                alt="media"
+                width={40}
+                height={40}
+                className="absolute top-6 left-6 z-20"
+              />
               <Link
                 href={slide.url}
                 className="absolute inset-0 items-center justify-center flex"
+                onClick={() => {
+                  if (slide.src.includes("https")) {
+                    return setVideo(slide.src);
+                  }
+                  setPhoto(slide.src);
+                }}
               >
                 <div
                   className={`${explore360} flex-col items-center gap-4 z-10 text-white`}

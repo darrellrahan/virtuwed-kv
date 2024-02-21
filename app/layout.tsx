@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { StateProvider } from "./context/state";
+import { ApiProvider } from "./context/ApiProvider";
+import { Asset360Provider } from "./context/Asset360Provider";
+import { RestoreScrollProvider } from "./context/RestoreScrollProvider";
 import { montserrat } from "./font";
 import "./globals.css";
 
@@ -14,10 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <StateProvider>
-      <html lang="en">
-        <body className={montserrat.className}>{children}</body>
-      </html>
-    </StateProvider>
+    <ApiProvider>
+      <RestoreScrollProvider>
+        <Asset360Provider>
+          <html lang="en">
+            <body className={montserrat.className}>{children}</body>
+          </html>
+        </Asset360Provider>
+      </RestoreScrollProvider>
+    </ApiProvider>
   );
 }

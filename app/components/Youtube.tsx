@@ -2,19 +2,21 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import ReactPlayer from "react-player/youtube";
 import { lora } from "../font";
 import { useRouter } from "next/navigation";
+import { useAsset360Context } from "../context/Asset360Provider";
 
 function Youtube360() {
   const clickToStart = useRef<HTMLDivElement>(null);
-  const [video, setVideo] = useState({
+  const [videoSettings, setVideoSettings] = useState({
     muted: true,
     playing: true,
   });
   const [overlay, setOverlay] = useState(false);
   const router = useRouter();
+  const { video } = useAsset360Context();
 
   return (
     <div className="h-screen relative">
@@ -32,11 +34,9 @@ function Youtube360() {
           <button
             onClick={() => {
               if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-                return router.push(
-                  "https://youtu.be/HqYhkpGgZXc?si=LkHRg9xralqrVtkO"
-                );
+                return router.push(video);
               }
-              setVideo({
+              setVideoSettings({
                 muted: true,
                 playing: true,
               });
@@ -68,11 +68,11 @@ function Youtube360() {
         </div>
       )}
       <ReactPlayer
-        url="https://www.youtube-nocookie.com/watch?v=HqYhkpGgZXc"
+        url={video}
         width="100%"
         height="100%"
-        muted={video.muted}
-        playing={video.playing}
+        muted={videoSettings.muted}
+        playing={videoSettings.playing}
         loop={true}
       />
       {overlay && (

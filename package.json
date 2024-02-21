@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@iconify/react": "^4.1.1",
+    "axios": "^1.6.7",
     "marzipano": "^0.10.2",
     "next": "14.1.0",
     "react": "^18",

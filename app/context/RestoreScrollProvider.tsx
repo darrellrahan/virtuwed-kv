@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
-type StateContextType = {
+type RestoreScrollContextType = {
   galleryState: {
     scrollY: number;
     currentSlide: number;
@@ -15,7 +15,7 @@ type StateContextType = {
   >;
 };
 
-const StateContext = React.createContext<StateContextType>({
+const RestoreScrollContext = React.createContext<RestoreScrollContextType>({
   galleryState: {
     scrollY: 0,
     currentSlide: 0,
@@ -23,22 +23,26 @@ const StateContext = React.createContext<StateContextType>({
   setGalleryState: () => {},
 });
 
-export const useStateContext = () => useContext(StateContext);
+export const useRestoreScrollContext = () => useContext(RestoreScrollContext);
 
-export const StateProvider = ({ children }: { children: React.ReactNode }) => {
+export const RestoreScrollProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [galleryState, setGalleryState] = useState({
     scrollY: 0,
     currentSlide: 0,
   });
 
   return (
-    <StateContext.Provider
+    <RestoreScrollContext.Provider
       value={{
         galleryState,
         setGalleryState,
       }}
     >
       {children}
-    </StateContext.Provider>
+    </RestoreScrollContext.Provider>
   );
 };
