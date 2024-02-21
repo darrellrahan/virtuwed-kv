@@ -56,10 +56,16 @@ function Place() {
 
       var geometry = new Marzipano.EquirectGeometry(data.levels);
 
-      var limiter = Marzipano.RectilinearView.limit.traditional(
-        data.faceSize,
-        (100 * Math.PI) / 180,
-        (120 * Math.PI) / 180
+      var limiter = Marzipano.util.compose(
+        Marzipano.RectilinearView.limit.vfov(
+          0.698131111111111,
+          2.09439333333333
+        ),
+        Marzipano.RectilinearView.limit.hfov(
+          0.698131111111111,
+          2.09439333333333
+        ),
+        Marzipano.RectilinearView.limit.pitch(-Math.PI / 2, Math.PI / 2)
       );
       var view = new Marzipano.RectilinearView(
         data.initialViewParameters,
