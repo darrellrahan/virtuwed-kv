@@ -9,13 +9,13 @@ import { useRestoreScrollContext } from "../context/RestoreScrollProvider";
 
 function page() {
   const { data } = useApiContext();
-  const { galleryState, setGalleryState } = useRestoreScrollContext();
+  const { scrollY, setScrollY } = useRestoreScrollContext();
 
   if (!data) return null;
 
   useEffect(() => {
     function handleScroll() {
-      setGalleryState({ ...galleryState, scrollY: window.scrollY });
+      setScrollY(window.scrollY);
     }
 
     window.addEventListener("scroll", handleScroll);
@@ -27,7 +27,7 @@ function page() {
 
   useEffect(() => {
     window.scrollTo({
-      top: galleryState.scrollY,
+      top: scrollY,
       behavior: "smooth",
     });
   }, []);
