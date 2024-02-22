@@ -10,7 +10,6 @@ import { lora } from "../font";
 
 function Place() {
   const panoRef = useRef(null);
-  const { push } = useRouter();
   const { photo } = useAsset360Context();
 
   useEffect(() => {

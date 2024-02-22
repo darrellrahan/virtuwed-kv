@@ -11,8 +11,6 @@ function page() {
   const { data } = useApiContext();
   const { scrollY, setScrollY } = useRestoreScrollContext();
 
-  if (!data) return null;
-
   useEffect(() => {
     function handleScroll() {
       setScrollY(window.scrollY);
@@ -31,6 +29,8 @@ function page() {
       behavior: "smooth",
     });
   }, []);
+
+  if (!data) return null;
 
   return (
     <main className="p-8 lg:p-16 lg:pb-96 pb-72 relative overflow-hidden">
