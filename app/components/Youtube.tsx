@@ -10,10 +10,7 @@ import { useAsset360Context } from "../context/Asset360Provider";
 
 function Youtube360() {
   const clickToStart = useRef<HTMLDivElement>(null);
-  const [videoSettings, setVideoSettings] = useState({
-    muted: true,
-    playing: true,
-  });
+  const [isPlaying, setIsPlaying] = useState(false);
   const [overlay, setOverlay] = useState(false);
   const router = useRouter();
   const { video } = useAsset360Context();
@@ -36,10 +33,7 @@ function Youtube360() {
               if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
                 return router.push(video);
               }
-              setVideoSettings({
-                muted: true,
-                playing: true,
-              });
+              setIsPlaying(true);
               clickToStart.current!.style.display = "none";
               setOverlay(true);
             }}
@@ -59,7 +53,7 @@ function Youtube360() {
       </div>
       {overlay && (
         <div
-          className={`${lora.className} absolute top-0 inset-x-0 h-24 bg-[#FFF9F9] flex items-center justify-center text-center text-[#F66F6F]`}
+          className={`${lora.className} absolute top-0 inset-x-0 h-20 bg-[#FFF9F9] flex items-center justify-center text-center text-[#F66F6F]`}
         >
           <div>
             <h4 className="mb-1 font-medium">The Wedding</h4>
@@ -71,9 +65,8 @@ function Youtube360() {
         url={video}
         width="100%"
         height="100%"
-        muted={videoSettings.muted}
-        playing={videoSettings.playing}
         loop={true}
+        playing={isPlaying}
       />
       {overlay && (
         <div
