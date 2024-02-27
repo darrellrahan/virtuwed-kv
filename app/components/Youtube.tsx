@@ -5,15 +5,16 @@ import Link from "next/link";
 import React, { useRef, useState } from "react";
 import ReactPlayer from "react-player/youtube";
 import { lora } from "../font";
-import { useRouter } from "next/navigation";
-import { useAsset360Context } from "../context/Asset360Provider";
+import { usePathname, useRouter } from "next/navigation";
+import { useSinglePageValueContext } from "../context/SinglePageValueProvider";
 
 function Youtube360() {
   const clickToStart = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [overlay, setOverlay] = useState(false);
   const router = useRouter();
-  const { video } = useAsset360Context();
+  const { video } = useSinglePageValueContext();
+  const pathname = usePathname();
 
   return (
     <div className="h-screen relative">
@@ -72,7 +73,10 @@ function Youtube360() {
         <div
           className={`${lora.className} absolute bottom-0 inset-x-0 h-16 bg-[#FFF9F9] flex items-center text-[#F66F6F] rounded-tl-[45px] font-medium px-8 text-lg`}
         >
-          <Link href="/gallery" className="flex items-center gap-2">
+          <Link
+            href={pathname.substring(0, pathname.length - 6)}
+            className="flex items-center gap-2"
+          >
             <Image
               src="/ic-back-pink.svg"
               alt="link"

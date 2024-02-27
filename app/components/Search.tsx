@@ -3,7 +3,7 @@ import React from "react";
 
 function Search() {
   return (
-    <section id="search" className="mb-24">
+    <section id="search">
       <div className="relative mb-4">
         <input
           type="text"

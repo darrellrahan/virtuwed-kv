@@ -2,23 +2,24 @@
 
 import React, { useContext, useState } from "react";
 
-type Asset360ContextType = {
+type SinglePageValueContextType = {
   photo: string;
   setPhoto: React.Dispatch<React.SetStateAction<string>>;
   video: string;
   setVideo: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const Asset360Context = React.createContext<Asset360ContextType>({
+const SinglePageValueContext = React.createContext<SinglePageValueContextType>({
   photo: "",
   setPhoto: () => {},
   video: "",
   setVideo: () => {},
 });
 
-export const useAsset360Context = () => useContext(Asset360Context);
+export const useSinglePageValueContext = () =>
+  useContext(SinglePageValueContext);
 
-export const Asset360Provider = ({
+export const SinglePageValueProvider = ({
   children,
 }: {
   children: React.ReactNode;
@@ -27,7 +28,7 @@ export const Asset360Provider = ({
   const [video, setVideo] = useState("");
 
   return (
-    <Asset360Context.Provider
+    <SinglePageValueContext.Provider
       value={{
         photo,
         setPhoto,
@@ -36,6 +37,6 @@ export const Asset360Provider = ({
       }}
     >
       {children}
-    </Asset360Context.Provider>
+    </SinglePageValueContext.Provider>
   );
 };

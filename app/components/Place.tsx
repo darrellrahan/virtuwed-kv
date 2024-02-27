@@ -2,15 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useRef } from "react";
-import { useAsset360Context } from "../context/Asset360Provider";
+import { useSinglePageValueContext } from "../context/SinglePageValueProvider";
 import { data } from "../data";
 import { lora } from "../font";
+import { usePathname } from "next/navigation";
 
 function Place() {
   const panoRef = useRef(null);
-  const { photo } = useAsset360Context();
+  const { photo } = useSinglePageValueContext();
+  const pathname = usePathname();
 
   useEffect(() => {
     var setMode = function () {
@@ -110,7 +111,10 @@ function Place() {
       <div
         className={`${lora.className} absolute bottom-0 inset-x-0 h-16 bg-[#FFF9F9] flex items-center text-[#F66F6F] rounded-tl-[45px] font-medium px-8 text-lg`}
       >
-        <Link href="/gallery" className="flex items-center gap-2">
+        <Link
+          href={pathname.substring(0, pathname.length - 6)}
+          className="flex items-center gap-2"
+        >
           <Image
             src="/ic-back-pink.svg"
             alt="link"
